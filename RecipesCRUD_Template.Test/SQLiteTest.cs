@@ -174,16 +174,16 @@ public class SQLiteTest
 
                 var material = (await das.GetAll<Material>()).Where((m) => m.Name == "Test Material").First();
                 Assert.NotNull(material);
-                
+
                 var materialCategory = (await das.GetAll<MaterialCategory>()).Where((mc) => mc.Name == "Test Material Category #1").First();
                 Assert.NotNull(materialCategory);
-                
+
                 var recipe = (await das.GetAll<Recipe>()).Where((r) => r.Name == "Test Recipe").First();
                 Assert.NotNull(recipe);
-                
+
                 var recipeCategory = (await das.GetAll<RecipeCategory>()).Where((rc) => rc.Name == "Test Recipe Category #1").First();
                 Assert.NotNull(recipeCategory);
-                
+
                 var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((mvp) => mvp.Value == 0.123).First();
                 Assert.NotNull(materialValuePair);
 
@@ -198,8 +198,6 @@ public class SQLiteTest
                 await das.Update(recipe);
                 await das.Update(recipeCategory);
                 await das.Update(materialValuePair);
-
-
             }
             {
                 var contextFactory = new AppDbContextFactorySQLite(dbPath);
@@ -220,8 +218,6 @@ public class SQLiteTest
                 var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((mvp) => mvp.Value == newMaterialValuePairValue).First();
                 Assert.NotNull(recipeCategory);
             }
-            
-
         }
     }
 }
