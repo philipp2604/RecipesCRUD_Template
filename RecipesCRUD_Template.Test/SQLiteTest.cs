@@ -116,13 +116,13 @@ public class SQLiteTest
             Assert.NotNull(material);
             Assert.NotNull(material.Category);
 
-            var materialCategory = (await das.GetAll<MaterialCategory>()).Where((c) => c.Name == "Test Material Category #1").First();
+            var materialCategory = (await das.GetAll<MaterialCategory>()).Where((mc) => mc.Name == "Test Material Category #1").First();
             Assert.NotNull(materialCategory);
             Assert.Null(materialCategory.Parent);
             Assert.NotEmpty(materialCategory.Materials);
             Assert.NotEmpty(materialCategory.SubCategories);
 
-            var materialCategory2 = (await das.GetAll<MaterialCategory>()).Where((c) => c.Name == "Test Material Category #2").First();
+            var materialCategory2 = (await das.GetAll<MaterialCategory>()).Where((mc) => mc.Name == "Test Material Category #2").First();
             Assert.NotNull(materialCategory2);
             Assert.NotNull(materialCategory2.Parent);
             Assert.Empty(materialCategory2.Materials);
@@ -133,22 +133,95 @@ public class SQLiteTest
             Assert.NotNull(recipe.Category);
             Assert.NotEmpty(recipe.Materials);
 
-            var recipeCategory = (await das.GetAll<RecipeCategory>()).Where((r) => r.Name == "Test Recipe Category #1").First();
+            var recipeCategory = (await das.GetAll<RecipeCategory>()).Where((rc) => rc.Name == "Test Recipe Category #1").First();
             Assert.NotNull(recipeCategory);
             Assert.Null(recipeCategory.Parent);
             Assert.NotEmpty(recipeCategory.SubCategories);
             Assert.NotEmpty(recipeCategory.Recipes);
 
-            var recipeCategory2 = (await das.GetAll<RecipeCategory>()).Where((r) => r.Name == "Test Recipe Category #2").First();
+            var recipeCategory2 = (await das.GetAll<RecipeCategory>()).Where((rc) => rc.Name == "Test Recipe Category #2").First();
             Assert.NotNull(recipeCategory2);
             Assert.NotNull(recipeCategory2.Parent);
             Assert.Empty(recipeCategory2.SubCategories);
             Assert.Empty(recipeCategory2.Recipes);
 
-            var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((r) => r.Value == 0.123).First();
+            var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((mvp) => mvp.Value == 0.123).First();
             Assert.NotNull(materialValuePair);
             Assert.NotNull(materialValuePair.Material);
             Assert.NotNull(materialValuePair.Recipe);
+        }
+    }
+
+    /// <summary>
+    /// Class <c>D_UpdateTest</c> tests the update function.
+    /// </summary>
+    [Collection("SqliteTestCollection")]
+    public class D_UpdateTest
+    {
+        [Theory]
+        [InlineData(_dbPath)]
+        private async void UpdateTest(string dbPath)
+        {
+            var newMaterialName = "Newly named Test Material";
+            var newMaterialCategoryName = "Newly named Test Category";
+            var newRecipeName = "Newly named Test Recipe";
+            var newRecipeCategoryName = "Newly named Test Category";
+            var newMaterialValuePairValue = 0.222f;
+
+            {
+                var contextFactory = new AppDbContextFactorySQLite(dbPath);
+                var das = new DataAccessService(contextFactory);
+
+                var material = (await das.GetAll<Material>()).Where((m) => m.Name == "Test Material").First();
+                Assert.NotNull(material);
+                
+                var materialCategory = (await das.GetAll<MaterialCategory>()).Where((mc) => mc.Name == "Test Material Category #1").First();
+                Assert.NotNull(materialCategory);
+                
+                var recipe = (await das.GetAll<Recipe>()).Where((r) => r.Name == "Test Recipe").First();
+                Assert.NotNull(recipe);
+                
+                var recipeCategory = (await das.GetAll<RecipeCategory>()).Where((rc) => rc.Name == "Test Recipe Category #1").First();
+                Assert.NotNull(recipeCategory);
+                
+                var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((mvp) => mvp.Value == 0.123).First();
+                Assert.NotNull(materialValuePair);
+
+                material.Name = newMaterialName;
+                materialCategory.Name = newMaterialCategoryName;
+                recipe.Name = newRecipeName;
+                recipeCategory.Name = newRecipeCategoryName;
+                materialValuePair.Value = newMaterialValuePairValue;
+
+                await das.Update(material);
+                await das.Update(materialCategory);
+                await das.Update(recipe);
+                await das.Update(recipeCategory);
+                await das.Update(materialValuePair);
+
+
+            }
+            {
+                var contextFactory = new AppDbContextFactorySQLite(dbPath);
+                var das = new DataAccessService(contextFactory);
+
+                var material = (await das.GetAll<Material>()).Where((m) => m.Name == newMaterialName).First();
+                Assert.NotNull(material);
+
+                var materialCategory = (await das.GetAll<MaterialCategory>()).Where((mc) => mc.Name == newMaterialCategoryName).First();
+                Assert.NotNull(material);
+
+                var recipe = (await das.GetAll<Recipe>()).Where((r) => r.Name == newRecipeName).First();
+                Assert.NotNull(recipe);
+
+                var recipeCategory = (await das.GetAll<RecipeCategory>()).Where((rc) => rc.Name == newRecipeCategoryName).First();
+                Assert.NotNull(recipeCategory);
+
+                var materialValuePair = (await das.GetAll<MaterialValuePair>()).Where((mvp) => mvp.Value == newMaterialValuePairValue).First();
+                Assert.NotNull(recipeCategory);
+            }
+            
+
         }
     }
 }
