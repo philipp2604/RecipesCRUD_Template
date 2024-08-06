@@ -1,4 +1,3 @@
-<p>RecipesCRUD_Template uses third party software / frameworks.<br/>
 Please find the used software aswell as their licenses inside the following list.</p>
 
 ## Third Party Software
