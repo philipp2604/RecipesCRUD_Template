@@ -2,10 +2,11 @@
 
 
 ## Description 
-<p>This is a simple base template for a recipe/formulation storage using EF Core.<br/>Implemented are basic CRUD operations.</p>
+<p>This is a simple base template for a recipe/formulation storage using EF Core.
+<br/>Implemented are basic CRUD operations and an example connector for SQLite databases.</p>
 <p>Example applications: electronic laboratory notebooks and machine control software.</p>
 
-**<p>This template is just a simple base.<br/>Properties, etc. must be customized according to your use case.</p>**
+**<p>This template is just a simple base.<br/>Properties, etc. must be customized according to the specific case.</p>**
 
 ## Third Party Software
 * [Microsoft.EntityFrameworkCore](https://github.com/dotnet/efcore) ([MIT licensed](https://github.com/dotnet/efcore/blob/main/LICENSE.txt))
