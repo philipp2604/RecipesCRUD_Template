@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace RecipesCRUD_Template.DataAccess.SQLite;
 
+/// <summary>
+/// Factory class to create an instance of <see cref="AppDbContextSQLite"/> at design time.
+/// </summary>
 public class AppDbContextDesignTimeFactorySQLite : IDesignTimeDbContextFactory<AppDbContextSQLite>
 {
     /// <summary>

@@ -4,6 +4,10 @@ using RecipesCRUD_Template.DataAccess.Interfaces;
 
 namespace RecipesCRUD_Template.DataAccess.SQLite;
 
+/// <summary>
+/// Implementation of <see cref="IAppDbContext"/> and <see cref="DbContext"/>
+/// </summary>
+/// <param name="options">Options to be used.</param>
 public class AppDbContextSQLite(DbContextOptions<AppDbContextSQLite> options) : DbContext(options), IAppDbContext
 {
     /// <summary>

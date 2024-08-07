@@ -4,6 +4,10 @@ using RecipesCRUD_Template.DataAccess.Interfaces;
 
 namespace RecipesCRUD_Template.DataAccess.Services;
 
+/// <summary>
+/// Data access service for interfacing <see cref="IAppDbContext"/>.
+/// </summary>
+/// <param name="factory">The <see cref="IAppDbContextFactory"/> for creating a new instance of <see cref="IAppDbContext"/>.</param>
 public class DataAccessService(IAppDbContextFactory factory) : IDataAccessService
 {
     private readonly IAppDbContext _appDbContext = factory.CreateDbContext();

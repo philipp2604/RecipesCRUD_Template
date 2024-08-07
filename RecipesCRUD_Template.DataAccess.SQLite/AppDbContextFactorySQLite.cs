@@ -3,6 +3,9 @@ using RecipesCRUD_Template.DataAccess.Interfaces;
 
 namespace RecipesCRUD_Template.DataAccess.SQLite;
 
+/// <summary>
+/// Factory class to create an instance of <see cref="AppDbContextSQLite"/>.
+/// </summary>
 public class AppDbContextFactorySQLite(string dbPath) : IAppDbContextFactory
 {
     private readonly string _connectionString = "Data Source=" + dbPath;
