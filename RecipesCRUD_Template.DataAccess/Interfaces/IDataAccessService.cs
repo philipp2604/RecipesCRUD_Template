@@ -8,25 +8,29 @@ public interface IDataAccessService
     /// Stores the entity of type <typeparamref name="T" /> inside the according <see cref="DbSet{T}" /> of the IAppDbContext.
     /// </summary>
     /// <param name="entity">An instance of <typeparamref name="T" /> to store inside the <see cref="DbSet{T}" /></param>
+    /// <param name="saveChanges">Specifies whether changes shall be saved to the database. /></param>
     /// <typeparam name="T">The type of entity to store.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task Create<T>(T entity) where T : DbObject;
+    public Task Create<T>(T entity, bool saveChanges = true) where T : DbObject;
 
     /// <summary>
     /// Updates the entity of type <typeparamref name="T" /> inside the according <see cref="DbSet{T}" /> of the IAppDbContext.<br/>Afterwards, the context is saved asynchronously to the database.
     /// </summary>
     /// <param name="entity">An instance of <typeparamref name="T" /> to update inside the <see cref="DbSet{T}" /></param>
+    /// <param name="saveChanges">Specifies whether changes shall be saved to the database. /></param>
     /// <typeparam name="T">The type of entity to update.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task Update<T>(T entity) where T : DbObject;
+    public Task Update<T>(T entity, bool saveChanges = true) where T : DbObject;
 
     /// <summary>
     /// Deletes the entity of type <typeparamref name="T" /> from the according <see cref="DbSet{T}" /> of the IAppDbContext.<br/>Afterwards, the context is saved asynchronously to the database.
     /// </summary>
     /// <param name="entity">An instance of <typeparamref name="T" /> to delete from the <see cref="DbSet{T}" /></param>
+    /// <param name="saveChanges">Specifies whether changes shall be saved to the database. /></param>
     /// <typeparam name="T">The type of entity to delete.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public Task Delete<T>(T entity) where T : DbObject;
+    public Task Delete<T>(T entity, bool saveChanges = true) where T : DbObject;
+
 
     /// <summary>
     /// Returns all instances of type <typeparamref name="T" /> from the according <see cref="DbSet{T}" />.
@@ -42,4 +46,10 @@ public interface IDataAccessService
     /// <returns>A task that represents the asynchronous operation.<br/>
     /// The task result either contains an instance of <see cref="{T?}" /> with the requested Id, or null if no match has been found. /></returns>
     public Task<T?> GetById<T>(int id) where T : DbObject;
+
+    /// <summary>
+    /// Saves all changes from DbContext to the database.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public Task SaveChanges();
 }
