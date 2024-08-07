@@ -19,14 +19,14 @@ public class SQLiteTest
     {
         [Theory]
         [InlineData(_dbPath)]
-        private void Setup(string dbPath)
+        private async Task SetupAsync(string dbPath)
         {
             File.Delete(dbPath);
 
             var contextFactory = new AppDbContextFactorySQLite(_dbPath);
 
             using var context = contextFactory.CreateDbContext();
-            contextFactory.CreateDbContext().EnsureDbCreated();
+            await contextFactory.CreateDbContext().EnsureDbCreatedAsync();
         }
     }
 

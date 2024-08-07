@@ -6,17 +6,40 @@ namespace RecipesCRUD_Template.DataAccess.SQLite;
 
 public class AppDbContextSQLite(DbContextOptions<AppDbContextSQLite> options) : DbContext(options), IAppDbContext
 {
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public DbSet<MaterialCategory> MaterialCategories { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public DbSet<Material> Materials { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public DbSet<MaterialValuePair> MaterialValues { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public DbSet<Recipe> Recipes { get; set; }
+
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
 
-    public bool EnsureDbCreated()
+    /// <inheritdoc/>
+    public async Task<bool> EnsureDbCreatedAsync(CancellationToken cancellationToken = default)
     {
-        return Database.EnsureCreated();
+        return await Database.EnsureCreatedAsync(cancellationToken);
     }
 
+    /// <summary>
+    /// <inheritdoc/>
+    /// </summary>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Material>().Navigation(m => m.Category).AutoInclude();

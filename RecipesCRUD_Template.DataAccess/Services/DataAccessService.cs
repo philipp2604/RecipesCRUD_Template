@@ -4,7 +4,6 @@ using RecipesCRUD_Template.DataAccess.Interfaces;
 
 namespace RecipesCRUD_Template.DataAccess.Services;
 
-/// <inheritdoc/>
 public class DataAccessService(IAppDbContextFactory factory) : IDataAccessService
 {
     private readonly IAppDbContext _appDbContext = factory.CreateDbContext();
