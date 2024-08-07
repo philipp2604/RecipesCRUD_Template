@@ -36,9 +36,15 @@ public class AppDbContextSQLite(DbContextOptions<AppDbContextSQLite> options) : 
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
 
     /// <inheritdoc/>
-    public async Task<bool> EnsureDbCreatedAsync(CancellationToken cancellationToken = default)
+    public async Task<bool> EnsureDbCreated(CancellationToken cancellationToken = default)
     {
         return await Database.EnsureCreatedAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> EnsureDbDeleted(CancellationToken cancellationToken = default)
+    {
+        return await Database.EnsureDeletedAsync(cancellationToken);
     }
 
     /// <summary>

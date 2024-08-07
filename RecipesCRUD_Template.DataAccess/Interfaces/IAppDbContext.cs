@@ -64,5 +64,12 @@ public interface IAppDbContext : IDisposable
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns><see langword="true" /> if the database is created, <see langword="false" /> if it already existed.</returns>
-    public Task<bool> EnsureDbCreatedAsync(CancellationToken cancellationToken = default);
+    public Task<bool> EnsureDbCreated(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Ensures asynchronously the database doesn't exists, if it exists, it will be deleted.
+    /// </summary>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <returns><see langword="true" /> if the database was deleted, <see langword="false" /> if it was already non-existant.</returns>
+    public Task<bool> EnsureDbDeleted(CancellationToken cancellationToken = default);
 }
