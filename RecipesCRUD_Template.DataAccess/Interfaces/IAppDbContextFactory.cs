@@ -3,8 +3,8 @@
 public interface IAppDbContextFactory
 {
     /// <summary>
-    /// Creates db context.
+    /// Creates an IAppDbContext instance.
     /// </summary>
-    /// <returns>An IAppDbContext</returns>
+    /// <returns>A new instance of <see cref="IAppDbContext" />.</returns>
     public IAppDbContext CreateDbContext();
 }

@@ -9,35 +9,35 @@ namespace RecipesCRUD_Template.DataAccess.Interfaces;
 public interface IAppDbContext : IDisposable
 {
     /// <summary>
-    /// Gets or sets the material categories.
+    /// Gets or sets the <see cref="DbSet{MaterialCategory}" />.
     /// </summary>
     public DbSet<MaterialCategory> MaterialCategories { get; set; }
 
     /// <summary>
-    /// Gets or sets the materials.
+    /// Gets or sets the <see cref="DbSet{Material}" />.
     /// </summary>
     public DbSet<Material> Materials { get; set; }
 
     /// <summary>
-    /// Gets or sets the material value pairs.
+    /// Gets or sets the <see cref="DbSet{MaterialValuePair}" />.
     /// </summary>
     public DbSet<MaterialValuePair> MaterialValues { get; set; }
 
     /// <summary>
-    /// Gets or sets the recipes.
+    /// Gets or sets the <see cref="DbSet{Recipe}" />.
     /// </summary>
     public DbSet<Recipe> Recipes { get; set; }
 
     /// <summary>
-    /// Gets or sets the recipe categories.
+    /// Gets or sets the <see cref="DbSet{RecipeCategory}" />.
     /// </summary>
     public DbSet<RecipeCategory> RecipeCategories { get; set; }
 
     /// <summary>
-    /// Returns a <![CDATA[DbSet<T>]]> for Type <![CDATA[<T>]]>
+    /// Returns a <see cref="DbSet{T}" /> for Type <![CDATA[<T>]]>
     /// </summary>
-    /// <typeparam name="T"/>
-    /// <returns><![CDATA[DbSet<T>]]></returns>
+    /// <typeparam name="T">The type of entities which the <see cref="DbSet{T}" /> contains.</typeparam>
+    /// <returns>A <see cref="DbSet{T}". /></returns>
     public DbSet<T> Set<T>() where T : class;
 
     /// <summary>
