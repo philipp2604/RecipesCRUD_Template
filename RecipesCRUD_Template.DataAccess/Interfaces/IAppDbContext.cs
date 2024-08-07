@@ -37,6 +37,15 @@ public interface IAppDbContext : IDisposable
     /// Returns a <see cref="DbSet{T}" /> for Type <![CDATA[<T>]]>
     /// </summary>
     /// <typeparam name="T">The type of entities which the <see cref="DbSet{T}" /> contains.</typeparam>
+    /// /// <exception cref="DbUpdateException">
+    ///     An error is encountered while saving to the database.
+    /// </exception>
+    /// <exception cref="DbUpdateConcurrencyException">
+    ///     A concurrency violation is encountered while saving to the database.
+    ///     A concurrency violation occurs when an unexpected number of rows are affected during save.
+    ///     This is usually because the data in the database has been modified since it was loaded into memory.
+    /// </exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     /// <returns>A <see cref="DbSet{T}". /></returns>
     public DbSet<T> Set<T>() where T : class;
 

@@ -12,6 +12,7 @@ public interface IDataAccessService
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <typeparam name="T">The type of entity to store.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public Task Create<T>(T entity, bool saveChanges = true, CancellationToken cancellationToken = default) where T : DbObject;
 
     /// <summary>
@@ -22,6 +23,7 @@ public interface IDataAccessService
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <typeparam name="T">The type of entity to update.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public Task Update<T>(T entity, bool saveChanges = true, CancellationToken cancellationToken = default) where T : DbObject;
 
     /// <summary>
@@ -32,6 +34,7 @@ public interface IDataAccessService
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <typeparam name="T">The type of entity to delete.</typeparam>
     /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public Task Delete<T>(T entity, bool saveChanges = true, CancellationToken cancellationToken = default) where T : DbObject;
 
     /// <summary>
@@ -40,6 +43,8 @@ public interface IDataAccessService
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <typeparam name="T">The type of entity to return.</typeparam>
     /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="ICollection{T}" /> containing all entities from the <see cref="DbSet{T}" /></returns>
+    /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public Task<ICollection<T>> GetAll<T>(CancellationToken cancellationToken = default) where T : DbObject;
 
     /// <summary>
@@ -47,6 +52,7 @@ public interface IDataAccessService
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <typeparam name="T">The type of entity to return.</typeparam>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     /// <returns>A task that represents the asynchronous operation.<br/>
     /// The task result either contains an instance of <see cref="{T?}" /> with the requested Id, or null if no match has been found. /></returns>
     public Task<T?> GetById<T>(int id, CancellationToken cancellationToken = default) where T : DbObject;
