@@ -13,27 +13,33 @@ public class DataAccessService(IAppDbContextFactory factory) : IDataAccessServic
     private readonly IAppDbContext _appDbContext = factory.CreateDbContext();
 
     /// <inheritdoc/>
-    public async Task Create<T>(T entity) where T : DbObject
+    public async Task Create<T>(T entity, bool saveChanges = true) where T : DbObject
     {
         if (GetById<T>(entity.Id).Result != null)
             return;
 
         await _appDbContext.Set<T>().AddAsync(entity);
-        await _appDbContext.SaveChangesAsync();
+        
+        if(saveChanges)
+            await _appDbContext.SaveChangesAsync();
     }
 
     /// <inheritdoc/>
-    public async Task Update<T>(T entity) where T : DbObject
+    public async Task Update<T>(T entity, bool saveChanges = true) where T : DbObject
     {
         _appDbContext.Set<T>().Update(entity);
-        await _appDbContext.SaveChangesAsync();
+
+        if (saveChanges)
+            await _appDbContext.SaveChangesAsync();
     }
 
     /// <inheritdoc/>
-    public async Task Delete<T>(T entity) where T : DbObject
+    public async Task Delete<T>(T entity, bool saveChanges = true) where T : DbObject
     {
         _appDbContext.Set<T>().Remove(entity);
-        await _appDbContext.SaveChangesAsync();
+
+        if (saveChanges)
+            await _appDbContext.SaveChangesAsync();
     }
 
     /// <inheritdoc/>
@@ -46,5 +52,11 @@ public class DataAccessService(IAppDbContextFactory factory) : IDataAccessServic
     public async Task<T?> GetById<T>(int id) where T : DbObject
     {
         return await _appDbContext.Set<T>().FindAsync(id);
+    }
+
+    /// <inheritdoc/>
+    public async Task SaveChanges(CancellationToken cancellationToken = default)
+    {
+        await _appDbContext.SaveChangesAsync();
     }
 }
