@@ -1,4 +1,4 @@
-# RecipesCRUD_Template &middot; [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# RecipesCRUD_Template &middot; [![build and test](https://github.com/philipp2604/RecipesCRUD_Template/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/philipp2604/RecipesCRUD_Template/actions/workflows/build-and-test.yml) &middot; [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 ## Description 
